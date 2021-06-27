@@ -1,0 +1,42 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.product-container{
+    height: 500px;
+}
+.product-picture{
+    height: 200px;
+}
+.product-heading{
+    height: 70px;
+}
+.product-description{
+    height: 100px;
+}
+.product-price{
+    height: 30px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+.sidebar{
+    width: 80px;
+    position: fixed;
+    top: 110px;
+    right: 10px;
+}
+
+.shopping-cart, .reset-btn{
+    width: 80px;
+    color: #fff;
+}
+.cart-counter{
+    font-size: 20px;
+}
+.shopping-cart svg{
+    width: 30px;
+    display: inline;
+}
