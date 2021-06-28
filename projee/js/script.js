@@ -236,17 +236,8 @@ class ProductManager{
     getAllProducts(){
         return this.#products;
     }
-    getCategorizedProducts(category = ''){
-        let array = [];
-        if(!category)
-        return null;
-        for (let product of this.#products) {
-            if(product.category == category)
-                array.push(product)
-        }
 
-        return array;
-    }
+
     getProductCategory($class = '', allCategories){
         let result = '';
         for (let categ of allCategories) {            
@@ -256,6 +247,16 @@ class ProductManager{
         }
 
         return result;
+    }
+    getProducts(callback){
+        let array = [];
+        for (let product of this.#products) {
+            if(callback(product)){
+                array.push(product);
+            }
+        }
+
+        return array;
     }
 }
 
@@ -270,6 +271,17 @@ let productManager = new ProductManager(products);
 
 domManager.displayCounter();
 domManager.subscribeResetCounterEvent();
+
+// load home page
+    (function () {
+        domManager.clearProductList('.products-list');
+        domManager.displaySlider();
+        for (let product of productManager.getProducts( (x) => x.price >= 32)){
+            domManager.getElmBySelect('.products-list').appendChild(domManager.createProductContainer(product));
+    }
+    }) ();
+
+// a list of all products
 domManager.getElmBySelect('#products').addEventListener('click', () =>{
     
     domManager.clearProductList('.products-list');
@@ -279,18 +291,24 @@ domManager.getElmBySelect('#products').addEventListener('click', () =>{
     }
 });
 
+// home page + a list of popular products
+domManager.getElmBySelect('.home').addEventListener('click', () => {
+    domManager.clearProductList('.products-list');
+    domManager.displaySlider();
+    for (let product of productManager.getProducts( (x) => x.price >= 32)){
+        domManager.getElmBySelect('.products-list').appendChild(domManager.createProductContainer(product));
+    }
+});
 
-domManager.getElmsBySelect('.home').addEventListener('click', () => {
-
-})
-
+// categorized list of products
 let categoriesBtns = domManager.getElmsBySelect('.category');
 
 for (let btn of categoriesBtns) {
     btn.addEventListener('click', (e) =>{
         domManager.clearProductList('.products-list');
         let category = productManager.getProductCategory(e.target.className, categories);
-        for (let product of productManager.getCategorizedProducts(category)) {
+        let productsCateg = productManager.getProducts((p) => p.category == category);
+        for (let product of productsCateg){
             domManager.getElmBySelect('.products-list').appendChild(domManager.createProductContainer(product));
         }
     });
