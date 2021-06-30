@@ -169,7 +169,7 @@ class DOMmanager{
             picture.className = 'product-picture';
             picture.style.width = '100%';
             picture.style.height = '200px';
-            picture.src = `../img/${product.picture}`;
+            picture.src = `./img/${product.picture}`;
             heading.className = 'product-heading';
             heading.innerText = product.name;
             description.className = 'product-description';
