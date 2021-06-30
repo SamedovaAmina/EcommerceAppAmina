@@ -189,8 +189,11 @@ class DOMmanager{
 
             return block;
     }
-    displaySlider(){
-
+    displaySlider(selector){
+        this.getElmBySelect(selector).style.display = 'block';        
+    }
+    hideSlider(selector){
+        this.getElmBySelect(selector).style.display = 'none';        
     }
 
     getElmBySelect(selector){
@@ -275,7 +278,7 @@ domManager.subscribeResetCounterEvent();
 // load home page
     (function () {
         domManager.clearProductList('.products-list');
-        domManager.displaySlider();
+        domManager.displaySlider('.main-carousel');
         for (let product of productManager.getProducts( (x) => x.price >= 32)){
             domManager.getElmBySelect('.products-list').appendChild(domManager.createProductContainer(product));
     }
@@ -285,7 +288,7 @@ domManager.subscribeResetCounterEvent();
 domManager.getElmBySelect('#products').addEventListener('click', () =>{
     
     domManager.clearProductList('.products-list');
-
+    domManager.hideSlider('.main-carousel');
     for (let product of productManager.getAllProducts()) {
         domManager.getElmBySelect('.products-list').appendChild(domManager.createProductContainer(product));
     }
@@ -294,7 +297,7 @@ domManager.getElmBySelect('#products').addEventListener('click', () =>{
 // home page + a list of popular products
 domManager.getElmBySelect('.home').addEventListener('click', () => {
     domManager.clearProductList('.products-list');
-    domManager.displaySlider();
+    domManager.displaySlider('.main-carousel');
     for (let product of productManager.getProducts( (x) => x.price >= 32)){
         domManager.getElmBySelect('.products-list').appendChild(domManager.createProductContainer(product));
     }
@@ -306,6 +309,7 @@ let categoriesBtns = domManager.getElmsBySelect('.category');
 for (let btn of categoriesBtns) {
     btn.addEventListener('click', (e) =>{
         domManager.clearProductList('.products-list');
+        domManager.hideSlider('.main-carousel');
         let category = productManager.getProductCategory(e.target.className, categories);
         let productsCateg = productManager.getProducts((p) => p.category == category);
         for (let product of productsCateg){
@@ -313,3 +317,12 @@ for (let btn of categoriesBtns) {
         }
     });
 }
+
+$('.main-carousel').flickity({
+    cellAlign: 'left',
+    contain: true,
+    freeScroll: true,
+    prevNextButtons: true,
+    pageDots: true,
+    groupCells: 3
+  });
