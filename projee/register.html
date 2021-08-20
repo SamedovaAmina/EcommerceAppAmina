@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="w-100 vh-100 d-flex align-items-center justify-content-center">
+            <form id="login" class="w-50 login shadow p-3 bg-info rounded my-5">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="surname" class="form-label">Surname</label>
+                    <input type="text" class="form-control" id="surname">
+                </div>
+                <div class="mb-3">
+                    <label for="birthyear" class="form-label">Birth Year</label>
+                    <input type="number" class="form-control" id="birthyear">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email">
+                  <span class="validation text-danger email-valid my-1"></span>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password">
+                  <span class="validation text-danger password-valid my-1"></span>
+                </div>
+                <input id="register-btn" type="submit" class="btn btn-outline-warning">
+                <div class="login-link py-3">
+                    <a class="text-light" href="main.html">Do you have an account? Just log in!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
