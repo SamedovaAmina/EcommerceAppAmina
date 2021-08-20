@@ -6,7 +6,7 @@ if(checkSecurity(sessionStorage.user)){
     getElementBySelector('.email').innerText += ` ${user.email}`;
     getElementBySelector('.age').innerText += ` ${user.age}`;
 } else{
-    document.location.href = 'main.html';
+    document.location.href = 'index.html';
 }
 
 function checkSecurity(key) {
@@ -30,5 +30,5 @@ function getElementBySelector(selector) {
 
 getElementBySelector('#logOut').addEventListener('click', () =>{
     delete sessionStorage.user;
-    document.location.href = 'main.html';
+    document.location.href = 'index.html';
 });
